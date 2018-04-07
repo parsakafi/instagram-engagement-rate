@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram Engagement Rate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+            integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="mt-3">
+        <h1>Instagram Engagement Rate</h1>
+        <form method="post" action="/" class="mt-5 col-sm-12 col-md-6 p-0">
+            <div class="form-group">
+                <label for="username">Instagram Username</label>
+                <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <% if(typeof error !== 'undefined' && error){ %>
+        <div class="alert alert-danger mt-3" role="alert">
+            Error in fetch data from Instagram!
+        </div>
+        <% }else if(typeof output !== 'undefined'){ %>
+        <hr>
+        <div class="mt-3 mb-5 clearfix">
+            <h3><a href="<%= output.link %>" target="_blank"><%= output.full_name || output.username %></a></h3>
+            <h4><%= output.biography %></h4>
+            <h5>Followers: <%= output.followers %></h5>
+            <% if(!output.can_see){ %>
+            <p>This Account is Private or You are Blocked by Account.</p>
+            <% }else{ %>
+            <h5>Engagement Rate Average: <%= output.engagement_rate_avg %>%</h5>
+            <br>
+            <div class="row">
+                <% output.images.forEach(function(image) { %>
+                <div class="col-sm-3 mb-3">
+                    <a href="<%= image.link %>" target="_blank" class="image">
+                        <i class="fas fa-<%= image.type === 'GraphVideo' ? 'video' : 'image' %>"></i>
+                        <img src="<%= image.thumbnail %>" alt="<%= image.caption %>" title="<%= image.caption %>"
+                             class="img-fluid">
+                    </a>
+                    <div class="row">
+                        <div class="col-4"><i class="fas fa-star"></i> <%= image.engagement_rate %>%</div>
+                        <div class="col-4"><i class="fas fa-heart"></i> <%= image.like %></div>
+                        <div class="col-4"><i class="fas fa-comment"></i> <%= image.comments %></div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
+        <div class="copyright p-1 m-5 text-center">
+            Developed by <a href="http://parsa.ws">Parsa Kafi</a> <a href="https://github.com/parsakafi/"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

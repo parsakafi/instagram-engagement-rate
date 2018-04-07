@@ -1,0 +1,10 @@
+.image {
+    position: relative;
+    display: block;
+}
+
+.fa-video, .fa-image {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
