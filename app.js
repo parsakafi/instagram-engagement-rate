@@ -45,7 +45,7 @@ app.get('/', (request, response) => {
                         engagement_rate = Number((engagement_rate).toFixed(3));
                         images.push({
                             "type": edges[p]['node']['__typename'],
-                            "caption": edges[p]['node']['edge_media_to_caption']['edges'][0]['node']['text'],
+                            "caption": edges[p]['node']['edge_media_to_caption']['edges'].length > 0 ? edges[p]['node']['edge_media_to_caption']['edges'][0]['node']['text'] : '',
                             "engagement_rate": engagement_rate,
                             "like": like_c,
                             "comments": comments_c,
@@ -80,5 +80,3 @@ app.get('/', (request, response) => {
 }).listen(port, () => {
     console.log('Listen to port', port, ',', 'http://localhost:' + port);
 });
-
-
