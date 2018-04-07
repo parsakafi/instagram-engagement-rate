@@ -8,3 +8,9 @@
     left: 20px;
     top: 20px;
 }
+
+.meta > div {
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+}
