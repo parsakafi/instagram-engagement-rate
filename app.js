@@ -14,8 +14,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 app.get('/', (request, response) => {
-    if (request.query.remove_cookies && fs.existsSync('./cookies.json'))
+    if (request.query.remove_cookies && fs.existsSync('./cookies.json')) {
+        console.log('Cookies file removed!');
         fs.unlinkSync('./cookies.json');
+    }
     response.render('index');
 
 }).post('/', (request, response) => {
